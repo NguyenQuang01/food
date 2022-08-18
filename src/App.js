@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
-
+// import { DatePicker, Space, version } from "antd";
+import "antd/dist/antd.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import Home from "./screens/Home";
+import { Routes, Route } from "react-router-dom";
+import Login from "./screens/Login";
+import NotFound from "./components/NotFound";
+import Cart from "./screens/Cart";
+import Detail from "./screens/Detail";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="/home/:id" element={<Detail />} />
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/*" element={<NotFound />} />
+    </Routes>
   );
 }
 
