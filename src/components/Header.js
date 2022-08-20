@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
 import { Button, Navbar, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -6,15 +6,8 @@ import { useNavigate } from "react-router-dom";
 import Context from "../Context/UserContext";
 const Header = () => {
   const [inputSeach, setinputSeach] = useState("");
-  const {
-    cartData,
-    listCart,
-    tkmk,
-    setcartData,
-    dataProduct,
-    setdataProduct,
-    start,
-  } = useContext(Context);
+  const { cartData, tkmk, dataProduct, setdataProduct, start } =
+    useContext(Context);
   const navigate = useNavigate();
   // function seach(e) {
   //   setinputSeach(e.target.value);
@@ -48,6 +41,11 @@ const Header = () => {
             <Navbar.Brand>
               <Link to="/home" className="nav-link">
                 <i className="devicon-codeigniter-plain"></i>Home
+              </Link>
+            </Navbar.Brand>
+            <Navbar.Brand>
+              <Link to="/manage" className="nav-link">
+                <i class="devicon-amazonwebservices-original"></i>Manage
               </Link>
             </Navbar.Brand>
             <Navbar.Collapse id="navbarScroll" className="abc">

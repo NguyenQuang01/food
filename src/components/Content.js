@@ -67,8 +67,7 @@ const Content = () => {
     }
     // setcartData(listCart);
   }
-  function pay({ id, img, name, price }) {}
-  // console.log(cartData);
+
   return (
     <div className="content">
       <Container>

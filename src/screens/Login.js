@@ -18,18 +18,18 @@ const Login = () => {
           settkmk(item.name);
           navigate("/home");
         } else {
-          document.getElementById('notificationt').style.display='flex'
-        function methodName () {
-          document.getElementById('notificationt').style.display='none'
-        }
-        setTimeout(methodName,3000)
+          document.getElementById("notificationt").style.display = "flex";
+          function methodName() {
+            document.getElementById("notificationt").style.display = "none";
+          }
+          setTimeout(methodName, 3000);
         }
       } else {
-        document.getElementById('notificationt').style.display='flex'
-        function methodName () {
-          document.getElementById('notificationt').style.display='none'
+        document.getElementById("notificationt").style.display = "flex";
+        function methodName() {
+          document.getElementById("notificationt").style.display = "none";
         }
-        setTimeout(methodName,3000)
+        setTimeout(methodName, 3000);
       }
     });
     console.log(tkmk);
@@ -59,11 +59,14 @@ const Login = () => {
         <img
           src="https://images.pexels.com/photos/952356/pexels-photo-952356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt=""
-          srcset=""
         />
       </div>
-      <div className="notificationt" id="notificationt">Sai thông tin tài khoản</div>
-      <div className="notificationt1" >tài khoản: trungquang <br></br> mật khẩu: 1</div>
+      <div className="notificationt" id="notificationt">
+        Sai thông tin tài khoản
+      </div>
+      <div className="notificationt1">
+        tài khoản: trungquang <br></br> mật khẩu: 1
+      </div>
       <Form
         className="formLoign"
         name="basic"

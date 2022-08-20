@@ -15,7 +15,6 @@ const FooderCart = (tong) => {
         <img
           src="https://caudovui.net/wp-content/uploads/2017/02/smile-cartoon-graphic.gif"
           alt=""
-          srcset=""
         />
       </div>
       <div className="container foodercontent">

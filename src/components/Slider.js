@@ -14,7 +14,9 @@ const Slider = () => {
             />
             <Carousel.Caption>
               <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <span>
+                Nulla vitae elit libero, a pharetra augue mollis interdum.
+              </span>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item interval={500} className="heghtSlider">
@@ -25,7 +27,9 @@ const Slider = () => {
             />
             <Carousel.Caption>
               <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <span>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </span>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item className="heghtSlider">
@@ -36,9 +40,9 @@ const Slider = () => {
             />
             <Carousel.Caption>
               <h3>Third slide label</h3>
-              <p>
+              <span>
                 Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
+              </span>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
