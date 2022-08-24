@@ -1,11 +1,25 @@
 // src/redux/cartSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Button, message, Space } from "antd";
+export const getPosts = createAsyncThunk(
+  //action type string
+  "posts/getPosts",
+  // callback function
+  async (thunkAPI) => {
+    const res = await fetch(
+      "https://62cfbda11cc14f8c087c4451.mockapi.io/api/product"
+    ).then((data) => data.json());
+    return res;
+  }
+);
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cart: [],
+    entities: [],
+    loading: false,
   },
+
   reducers: {
     addToCart: (state, action) => {
       const itemInCart = state.cart.find(
@@ -40,6 +54,18 @@ const cartSlice = createSlice({
     },
     removeAll: (state, action) => {
       state.cart.splice(0);
+    },
+  },
+  extraReducers: {
+    [getPosts.pending]: (state) => {
+      state.loading = true;
+    },
+    [getPosts.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.entities = payload;
+    },
+    [getPosts.rejected]: (state) => {
+      state.loading = false;
     },
   },
 });

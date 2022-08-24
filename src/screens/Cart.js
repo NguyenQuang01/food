@@ -5,7 +5,6 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import FooderCart from "../components/FooderCart";
 import Information from "../components/Information";
-import Context from "../Context/UserContext";
 // src/pages/Cart.js
 import { useSelector } from "react-redux";
 import {
@@ -17,7 +16,6 @@ import {
 import { useDispatch } from "react-redux";
 // import Item from "antd/lib/list/Item";
 const Cart = () => {
-  const { cartData, setcartData } = useContext(Context);
   const dispatch = useDispatch();
 
   // src/pages/Cart.js
@@ -25,10 +23,7 @@ const Cart = () => {
   let navigate = useNavigate();
 
   function handleSucc() {
-    // onFinish();
-    dispatch(removeAll())
-    // cart.user.splice(0);
-    // setcartData([]);
+    dispatch(removeAll());
     let a = document.getElementById("1");
     console.log((a.style.display = "flex"));
     function methodName() {
@@ -47,33 +42,6 @@ const Cart = () => {
       imge: item.img,
     })),
   ];
-  // {
-  //   key: 0,
-  //   name: "John Brown",
-  //   price: 32,
-  //   sl: 1,
-  //   action: "x",
-  //   tags: ["nice", "developer"],
-  //   imge: "https://images.pexels.com/photos/952356/pexels-photo-952356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  // },
-  // {
-  //   key: 1,
-  //   name: "Jim Green",
-  //   price: 42,
-  //   sl: 1,
-  //   tags: ["nice", "developer"],
-  //   imge: "https://images.pexels.com/photos/1860204/pexels-photo-1860204.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  //   action: "x",
-  // },
-  // {
-  //   key: 2,
-  //   name: "Joe Black",
-  //   price: 32,
-  //   sl: 1,
-  //   tags: ["nice", "developer"],
-  //   imge: "https://images.pexels.com/photos/1059943/pexels-photo-1059943.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  //   action: "x",
-  // },
   const [selectionType, setSelectionType] = useState("checkbox");
   // const [slInput, setslInput] = useState(data[0]);
   const [sumListCart, setsumListCart] = useState([]);
@@ -198,7 +166,6 @@ const Cart = () => {
         tong={tong}
         setsucc={setsucc}
         succ={setsucc}
-        setcartData={setcartData}
         onFinish={onFinish}
         handleSucc={handleSucc}
       />

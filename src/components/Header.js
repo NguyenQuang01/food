@@ -13,25 +13,18 @@ const Header = () => {
   const { cartData, tkmk, dataProduct, setdataProduct, start } =
     useContext(Context);
   const navigate = useNavigate();
-  // function seach(e) {
-  //   setinputSeach(e.target.value);
-  // }
-  // const [foundUsers, setFoundUsers] = useState(USERS);
+  
 
   const seach = (e) => {
     const keyword = e.target.value;
-    // console.log(dataProduct);
     if (keyword !== "") {
-      // console.log("a");
 
       const results = dataProduct.filter((user) => {
         return user.name.toLowerCase().includes(keyword.toLowerCase());
-        // Use the toLowerCase() method to make it case-insensitive
       });
       setdataProduct(results);
     } else {
       setdataProduct(start);
-      // If the text field is empty, show all users
     }
 
     setinputSeach(keyword);

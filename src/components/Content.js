@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import axios from "axios";
-import { NavLink, Link } from "react-router-dom";
-import { Tag } from "antd";
+import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom";
+import { Tag, Spin } from "antd";
 import {
   Container,
   Row,
@@ -13,16 +12,19 @@ import {
 } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
 // src/components/Item.js
-import { useDispatch } from "react-redux";
 import { addToCart } from "../store/slice";
-import Context from "../Context/UserContext";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../store/slice";
 const Content = () => {
   const [limit, setlimit] = useState(10);
   const [list, setlist] = useState(0);
-  const { cartData, setcartData, listCart, dataProduct } = useContext(Context);
-  // console.log(cartData);
-  // src/components/Item.js
+
   const dispatch = useDispatch();
+  const { entities, loading } = useSelector((state) => state);
+  useEffect(() => {
+    dispatch(getPosts());
+  }, []);
+  console.log(entities && entities);
   const loadMode = () => {
     setlimit((pre) => pre + 5);
   };
@@ -56,21 +58,6 @@ const Content = () => {
     setlist((pre) => (pre = 6));
     setlimit((pre) => (pre = 5));
   };
-  // console.log(dataProduct);
-  // const navigate = useNavigate();
-  function close(id, img, name, price) {
-    setcartData((pre) => [...pre, { id, img, name, price }]);
-    // listCart;pre
-    document.getElementById("close").style.display = "block";
-    myFunction();
-    function myFunction() {
-      setTimeout(alertFunc, 3000);
-    }
-    function alertFunc() {
-      document.getElementById("close").style.display = "none";
-    }
-    // setcartData(listCart);
-  }
 
   return (
     <div className="content">
@@ -117,58 +104,63 @@ const Content = () => {
           </Col>
           <Col>
             <Row>
-              <CardGroup>
-                {dataProduct &&
-                  dataProduct
-                    .filter((i) =>
-                      list === 0 ? i.list > list : i.list === list
-                    )
-                    .slice(0, limit)
+              {loading ? (
+                <div className="example">
+                  <Spin size="large" />
+                </div>
+              ) : (
+                <CardGroup>
+                  {entities &&
+                    entities
+                      .filter((i) =>
+                        list === 0 ? i.list > list : i.list === list
+                      )
+                      .slice(0, limit)
 
-                    .map((item) => (
-                      <Col xs={3} key={item.id}>
-                        {" "}
-                        <Card>
-                          <Card.Img variant="top" src={item.img} />
-                          <Card.Body>
-                            <Card.Title>{item.name.toString()}</Card.Title>
-                            <Card.Text>
-                              5 <FaStar color="#ffd839" />
-                            </Card.Text>
-                            <Card.Text>
-                              <p className="priceProduct">{item.price} đ</p>
-                            </Card.Text>
-                            <Card.Text className="desProduct">
-                              {item.des}
-                            </Card.Text>
-                          </Card.Body>
-                          <Card.Footer>
-                            <Button
-                              variant="secondary"
-                              // onClick={() =>
-                              //   close(item.id, item.img, item.name, item.price)
-                              // }
-                              onClick={() =>
-                                dispatch(
-                                  addToCart({
-                                    id: item.id,
-                                    img: item.img,
-                                    name: item.name,
-                                    price: item.price,
-                                  })
-                                )
-                              }
-                            >
-                              add cart
-                            </Button>{" "}
-                            <Link to={item.id}>
-                              <Button variant="success">Mua</Button>{" "}
-                            </Link>
-                          </Card.Footer>
-                        </Card>
-                      </Col>
-                    ))}
-                {/* <Col xs={3}>
+                      .map((item) => (
+                        <Col xs={3} key={item.id}>
+                          {" "}
+                          <Card>
+                            <Card.Img variant="top" src={item.img} />
+                            <Card.Body>
+                              <Card.Title>{item.name.toString()}</Card.Title>
+                              <Card.Text>
+                                5 <FaStar color="#ffd839" />
+                              </Card.Text>
+                              <Card.Text>
+                                <p className="priceProduct">{item.price} đ</p>
+                              </Card.Text>
+                              <Card.Text className="desProduct">
+                                {item.des}
+                              </Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                              <Button
+                                variant="secondary"
+                                // onClick={() =>
+                                //   close(item.id, item.img, item.name, item.price)
+                                // }
+                                onClick={() =>
+                                  dispatch(
+                                    addToCart({
+                                      id: item.id,
+                                      img: item.img,
+                                      name: item.name,
+                                      price: item.price,
+                                    })
+                                  )
+                                }
+                              >
+                                add cart
+                              </Button>{" "}
+                              <Link to={item.id}>
+                                <Button variant="success">Mua</Button>{" "}
+                              </Link>
+                            </Card.Footer>
+                          </Card>
+                        </Col>
+                      ))}
+                  {/* <Col xs={3}>
                   {" "}
                   <Card>
                     <Card.Img
@@ -331,7 +323,8 @@ const Content = () => {
                     </Card.Footer>
                   </Card>
                 </Col> */}
-              </CardGroup>
+                </CardGroup>
+              )}
             </Row>{" "}
             <div className="loadMode">
               {" "}

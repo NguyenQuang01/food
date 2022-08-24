@@ -24,7 +24,7 @@ const Login = () => {
           });
           setTimeout(() => {
             navigate("/home");
-          }, 3000);
+          }, 2000);
         } else {
           message.error("Sai mật khẩu");
         }

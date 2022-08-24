@@ -1,10 +1,7 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-// import { useNavigate } from "react-router-dom";
-import Context from "../Context/UserContext";
 
 const FooderCart = (tong) => {
-  const { dataProduct, listCart, setcartData } = useContext(Context);
 
   // let navigate = useNavigate();
   

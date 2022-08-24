@@ -433,3 +433,8 @@ img.detailImge {
 .color {
   color: #000;
 }
+/* load  */
+.example {
+  display: flex;
+  justify-content: center;
+}
