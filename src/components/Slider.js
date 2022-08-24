@@ -19,7 +19,7 @@ const Slider = () => {
               </span>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item interval={500} className="heghtSlider">
+          <Carousel.Item interval={1000} className="heghtSlider">
             <img
               className="d-block w-100"
               src="https://images.pexels.com/photos/1482803/pexels-photo-1482803.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -32,7 +32,7 @@ const Slider = () => {
               </span>
             </Carousel.Caption>
           </Carousel.Item>
-          <Carousel.Item className="heghtSlider">
+          <Carousel.Item className="heghtSlider" interval={1000}>
             <img
               className="d-block w-100"
               src="https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

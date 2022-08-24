@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import Context from "../Context/UserContext";
+import { Tab, Tabs } from "react-bootstrap";
 import axios from "axios";
 const Login = () => {
   const { tkmk, settkmk } = useContext(Context);
@@ -9,6 +10,7 @@ const Login = () => {
   const [user, setuser] = useState();
   // const { user, setuser } = useContext(UserContext);
   // console.log(user);
+  const key = "updatable";
   const onFinish = (values) => {
     // console.log("Success:", values);
     // console.log(
@@ -16,20 +18,18 @@ const Login = () => {
       if (item.name === values.username) {
         if (item.pass === values.password) {
           settkmk(item.name);
-          navigate("/home");
+          message.loading({
+            content: "Loading...",
+            key,
+          });
+          setTimeout(() => {
+            navigate("/home");
+          }, 3000);
         } else {
-          document.getElementById("notificationt").style.display = "flex";
-          function methodName() {
-            document.getElementById("notificationt").style.display = "none";
-          }
-          setTimeout(methodName, 3000);
+          message.error("Sai mật khẩu");
         }
       } else {
-        document.getElementById("notificationt").style.display = "flex";
-        function methodName() {
-          document.getElementById("notificationt").style.display = "none";
-        }
-        setTimeout(methodName, 3000);
+        // message.error("sai tài khoản");
       }
     });
     console.log(tkmk);
@@ -52,7 +52,20 @@ const Login = () => {
       });
   }, []);
   console.log(user);
-
+  function register(values) {
+    if (values.passwordRegister === values.passwordvsRegister) {
+      console.log("thanh cong");
+    } else {
+      message.error("nhập lại mật khẩu không đúng");
+    }
+  }
+  const [form] = Form.useForm();
+  const onFill = () => {
+    form.setFieldsValue({
+      username: "trungquang",
+      password: "1",
+    });
+  };
   return (
     <div className="full-container">
       <div className="avatarLogin">
@@ -64,75 +77,167 @@ const Login = () => {
       <div className="notificationt" id="notificationt">
         Sai thông tin tài khoản
       </div>
-      <div className="notificationt1">
-        tài khoản: trungquang <br></br> mật khẩu: 1
+
+      <div className="formTab">
+        <Tabs
+          defaultActiveKey="profile"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+        >
+          <Tab eventKey="login" title="Login">
+            <Form
+              className="formLoign"
+              name="basic"
+              labelCol={{
+                span: 8,
+              }}
+              wrapperCol={{
+                span: 16,
+              }}
+              initialValues={{
+                remember: true,
+              }}
+              form={form}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password!",
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item
+                name="remember"
+                valuePropName="checked"
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+                <Button type="primary" htmlType="submit">
+                  {/* <Link className="nav-link" to="/home"> */}
+                  Submit
+                  {/* </Link> */}
+                </Button>
+                <Button type="link" htmlType="button" onClick={onFill}>
+                  Fill form
+                </Button>
+              </Form.Item>
+            </Form>
+          </Tab>
+          <Tab eventKey="register" title="Register">
+            <Form
+              className="formLoign"
+              name="basic"
+              labelCol={{
+                span: 8,
+              }}
+              wrapperCol={{
+                span: 16,
+              }}
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={register}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Username"
+                name="usernameRegister"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+
+              <Form.Item
+                label="Password"
+                name="passwordRegister"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password!",
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+              <Form.Item
+                label="Passwordvs"
+                name="passwordvsRegister"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password!",
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+
+              <Form.Item
+                name="remember"
+                valuePropName="checked"
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+                <Checkbox>Remember me</Checkbox>
+              </Form.Item>
+
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+                <Button type="primary" htmlType="submit">
+                  {/* <Link className="nav-link" to="/home"> */}
+                  Submit
+                  {/* </Link> */}
+                </Button>
+              </Form.Item>
+            </Form>
+          </Tab>
+        </Tabs>
       </div>
-      <Form
-        className="formLoign"
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="remember"
-          valuePropName="checked"
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            {/* <Link className="nav-link" to="/home"> */}
-            Submit
-            {/* </Link> */}
-          </Button>
-        </Form.Item>
-      </Form>
     </div>
   );
 };

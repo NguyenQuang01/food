@@ -114,7 +114,7 @@ const Manage = () => {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="tên sản phẩm"/>
           </Form.Item>
           <Form.Item
             name={["user", "link"]}
@@ -126,31 +126,23 @@ const Manage = () => {
               },
             ]}
           >
-            <Input />
+            <Input placeholder="ảnh" />
           </Form.Item>
-          {/* <Form.Item name={["user", "Thành Phố"]} label="Thành Phố">
-            <Select>
-              <Select.Option value="Hà Nội">Hà Nội</Select.Option>
-              <Select.Option value="Nam Đinh">Nam Đinh</Select.Option>
-              <Select.Option value="Hải Phòng">Hải Phòng</Select.Option>
-              <Select.Option value="Thanh hóa">Thanh hóa</Select.Option>
-            </Select>
-          </Form.Item> */}
           <Form.Item name={["user", "Địa Chỉ"]} label="Địa Chỉ">
-            <Input />
+            <Input placeholder="địa chỉ" />
           </Form.Item>
           <Form.Item name={["user", "Loại"]} label="Loại">
-            <Input />
+            <Input placeholder="loại" />
           </Form.Item>
           <Form.Item name={["user", "giá"]} label="Giá">
-            <Input />
+            <Input placeholder="giá" />
           </Form.Item>
           <Form.Item name={["user", "des"]} label="des">
-            <Input.TextArea />
+            <Input.TextArea placeholder="miêu tả" />
           </Form.Item>
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
             <Button type="primary" htmlType="submit">
-              Thanh Toán
+              Thêm sản phẩm
             </Button>
           </Form.Item>
         </Form>

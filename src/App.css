@@ -38,11 +38,20 @@ h5 {
 .ant-col-8 {
   flex: 0 0 13.33333333%;
 }
-.formLoign {
-  position: absolute;
-  bottom: 30%;
+.formLoign,
+ul.mb-3.nav.nav-tabs {
+  top: 30%;
   left: 20%;
   width: 60%;
+}
+.formTab {
+  position: absolute;
+  width: 100%;
+  top: 25%;
+  left: 10%;
+}
+li > .nav-link {
+  color: #ffffff;
 }
 .notificationt {
   position: absolute;
@@ -267,9 +276,6 @@ p.priceProduct {
   padding-bottom: 200px;
 }
 
-.ant-form-item-label > label {
-  color: rgba(0, 0, 0, 0.85) !important;
-}
 .ant-row.ant-form-item-row {
   justify-content: center;
 }
@@ -421,4 +427,9 @@ img.detailImge {
 /* details */
 .details {
   margin-top: 10%;
+}
+
+/* mângee */
+.color {
+  color: #000;
 }

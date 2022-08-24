@@ -4,7 +4,11 @@ import { Button, Navbar, Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Context from "../Context/UserContext";
+// src/pages/Cart.js
+import { useSelector } from "react-redux";
 const Header = () => {
+  // src/pages/Cart.js
+  const cart = useSelector((state) => state.cart);
   const [inputSeach, setinputSeach] = useState("");
   const { cartData, tkmk, dataProduct, setdataProduct, start } =
     useContext(Context);
@@ -66,7 +70,7 @@ const Header = () => {
             <div className="avatarHeader">
               <div className="imgAvatarHeader">
                 <img
-                  src="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.30808-6/267775264_1378653919253655_7315343909142684339_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=730e14&_nc_ohc=Lb-0ciUdR_oAX_ZiK33&_nc_ht=scontent-hkt1-1.xx&oh=00_AT8u-LCZP_sOgBKtNYcRUj-I_GQvmFt26Y_IWyW4LxMtDQ&oe=62F9F885"
+                  src={require("../imge/292141043_1455154994936880_9136350329601171478_n.jpg")}
                   alt=""
                 />
               </div>
@@ -85,7 +89,7 @@ const Header = () => {
               <Link to="/cart" className="nav-link">
                 {" "}
                 <FaShoppingCart color="#777" size={30} />
-                <div className="slCart">{cartData && cartData.length}</div>
+                <div className="slCart">{cart && cart.length}</div>
               </Link>
             </Navbar.Brand>
           </Container>

@@ -1,21 +1,33 @@
-import React, { useState, useEffect, useRef, useContext } from "react";
+import React, { useState, useContext } from "react";
 import Header from "../components/Header";
-import { Divider, Radio, Table, Tag } from "antd";
+import { Divider, Radio, Table } from "antd";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import FooderCart from "../components/FooderCart";
-import Successful from "../components/Successful";
 import Information from "../components/Information";
 import Context from "../Context/UserContext";
-
+// src/pages/Cart.js
+import { useSelector } from "react-redux";
+import {
+  incrementQuantity,
+  decrementQuantity,
+  removeItem,
+  removeAll,
+} from "../store/slice";
+import { useDispatch } from "react-redux";
 // import Item from "antd/lib/list/Item";
 const Cart = () => {
   const { cartData, setcartData } = useContext(Context);
+  const dispatch = useDispatch();
+
+  // src/pages/Cart.js
+  const cart = useSelector((state) => state.cart);
   let navigate = useNavigate();
 
   function handleSucc() {
     // onFinish();
-    cartData.splice(0);
+    dispatch(removeAll())
+    // cart.user.splice(0);
     // setcartData([]);
     let a = document.getElementById("1");
     console.log((a.style.display = "flex"));
@@ -25,18 +37,16 @@ const Cart = () => {
     setTimeout(methodName, 3000);
   }
   const data = [
-    cartData.map((item, index) => ({
+    cart?.map((item, index) => ({
       tt: index,
       key: item.id,
       name: item.name,
-      price: item.price,
-      sl: 1,
+      price: item.price * item.quantity,
+      quantity: item.quantity,
       action: "x",
-      tags: ["nice", "developer"],
       imge: item.img,
     })),
   ];
-  console.log("cart", data);
   // {
   //   key: 0,
   //   name: "John Brown",
@@ -65,54 +75,14 @@ const Cart = () => {
   //   action: "x",
   // },
   const [selectionType, setSelectionType] = useState("checkbox");
-  const [slInput, setslInput] = useState(data[0]);
+  // const [slInput, setslInput] = useState(data[0]);
   const [sumListCart, setsumListCart] = useState([]);
   const [succ, setsucc] = useState();
   const onFinish = (values) => {
     console.log(values);
     handleSucc();
   };
-  function delete111(prop) {
-    console.log(prop);
-    let newDataCart = cartData.filter((item) => item.id !== prop);
-    setcartData(newDataCart);
-  }
-  console.log(cartData);
-  function handledMins(prop) {
-    let y = slInput.map((item) => {
-      // console.log(item.sl + 1);
 
-      return prop === item.key
-        ? { ...item, sl: item.sl - 1, price: data[prop].price * (item.sl - 1) }
-        : item;
-    });
-    setslInput(y);
-  }
-
-  function handledPlus(prop, tt) {
-    // let a = data[0].length;
-    console.log(data[0][tt].price);
-    // console.log(prop);
-    // data[0].map((item) => {
-    //   return console.log(prop === item.key);
-    // });
-    let y = slInput.map((item) => {
-      // console.log(prop === item.key);
-      return prop === item.key
-        ? {
-            ...item,
-            sl: item.sl + 1,
-            price: data[0][tt].price * (item.sl + 1),
-          }
-        : item;
-    });
-    setslInput(y);
-    // document
-    //   .querySelector(".ant-checkbox-input")
-    //   .removeAttribute("aria-checked");
-    // console.log(document.querySelector(".ant-checkbox-input"));
-  }
-  // console.log(slInput[0].sl);
   const columns = [
     {
       title: "Ảnh",
@@ -128,7 +98,7 @@ const Cart = () => {
     {
       title: "giá",
       dataIndex: "price",
-      render: (price) => <p>{price}</p>,
+      render: (price, record) => <p>{price}</p>,
     },
     {
       title: "Số lượng",
@@ -138,14 +108,20 @@ const Cart = () => {
         <div className="handleInput">
           <Button
             variant="outline-secondary"
-            onClick={() => handledMins(key, record.tt)}
+            onClick={() => dispatch(decrementQuantity(record.key))}
           >
             -
           </Button>
-          <input className="inputSl" value={record.sl} id="inputPlus" />
+          <input
+            className="inputSl"
+            value={data[0].find((item) => item.key === record.key).quantity}
+            id="inputPlus"
+          />
           <Button
             variant="outline-success"
-            onClick={() => handledPlus(key, record.tt)}
+            onClick={() => {
+              dispatch(incrementQuantity(record.key));
+            }}
           >
             +
           </Button>
@@ -156,7 +132,10 @@ const Cart = () => {
       title: "xóa",
       dataIndex: "key",
       render: (key, record) => (
-        <Button variant="outline-secondary" onClick={() => delete111(key)}>
+        <Button
+          variant="outline-secondary"
+          onClick={() => dispatch(removeItem(record.key))}
+        >
           xóa
         </Button>
       ),
@@ -178,6 +157,7 @@ const Cart = () => {
     //   name: record.name,
     // }),
   };
+  console.log(sumListCart);
   const arrsum = [];
   let tong = 0;
   // body
@@ -211,7 +191,7 @@ const Cart = () => {
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={slInput}
+          dataSource={data[0]}
         />
       </div>
       <FooderCart

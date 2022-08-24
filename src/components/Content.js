@@ -12,13 +12,17 @@ import {
   Button,
 } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
+// src/components/Item.js
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/slice";
 import Context from "../Context/UserContext";
 const Content = () => {
   const [limit, setlimit] = useState(10);
   const [list, setlist] = useState(0);
   const { cartData, setcartData, listCart, dataProduct } = useContext(Context);
   // console.log(cartData);
-
+  // src/components/Item.js
+  const dispatch = useDispatch();
   const loadMode = () => {
     setlimit((pre) => pre + 5);
   };
@@ -141,8 +145,18 @@ const Content = () => {
                           <Card.Footer>
                             <Button
                               variant="secondary"
+                              // onClick={() =>
+                              //   close(item.id, item.img, item.name, item.price)
+                              // }
                               onClick={() =>
-                                close(item.id, item.img, item.name, item.price)
+                                dispatch(
+                                  addToCart({
+                                    id: item.id,
+                                    img: item.img,
+                                    name: item.name,
+                                    price: item.price,
+                                  })
+                                )
                               }
                             >
                               add cart

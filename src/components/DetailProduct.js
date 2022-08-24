@@ -3,8 +3,10 @@ import { Card, CardGroup, Button } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
 import { NavLink, useParams } from "react-router-dom";
 import Context from "../Context/UserContext";
-
+import { addToCart } from "../store/slice";
+import { useDispatch } from "react-redux";
 const DetailProduct = () => {
+  const dispatch = useDispatch();
   const { dataProduct, listCart, setcartData } = useContext(Context);
   const params = useParams();
   function close(id, img, name, price) {
@@ -63,7 +65,14 @@ const DetailProduct = () => {
                       value="Thêm vào giỏ hàng"
                       className="detailBtn"
                       onClick={() =>
-                        close(item.id, item.img, item.name, item.price)
+                        dispatch(
+                          addToCart({
+                            id: item.id,
+                            img: item.img,
+                            name: item.name,
+                            price: item.price,
+                          })
+                        )
                       }
                     />{" "}
                   </NavLink>

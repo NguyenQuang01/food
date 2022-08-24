@@ -21,7 +21,7 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
-const Information = ({ onFinish}) => {
+const Information = ({ onFinish }) => {
   return (
     <div className="Inf container">
       {" "}
