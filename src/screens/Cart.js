@@ -19,7 +19,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   // src/pages/Cart.js
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart.cart);
   let navigate = useNavigate();
 
   function handleSucc() {

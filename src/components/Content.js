@@ -20,7 +20,7 @@ const Content = () => {
   const [list, setlist] = useState(0);
 
   const dispatch = useDispatch();
-  const { entities, loading } = useSelector((state) => state);
+  const { entities, loading } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(getPosts());
   }, []);

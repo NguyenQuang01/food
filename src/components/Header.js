@@ -8,17 +8,15 @@ import Context from "../Context/UserContext";
 import { useSelector } from "react-redux";
 const Header = () => {
   // src/pages/Cart.js
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart.cart);
   const [inputSeach, setinputSeach] = useState("");
   const { cartData, tkmk, dataProduct, setdataProduct, start } =
     useContext(Context);
   const navigate = useNavigate();
-  
 
   const seach = (e) => {
     const keyword = e.target.value;
     if (keyword !== "") {
-
       const results = dataProduct.filter((user) => {
         return user.name.toLowerCase().includes(keyword.toLowerCase());
       });
