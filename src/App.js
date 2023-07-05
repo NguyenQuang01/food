@@ -1,5 +1,4 @@
 // import { DatePicker, Space, version } from "antd";
-import "antd/dist/antd.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Home from "./screens/Home";
@@ -10,16 +9,16 @@ import Cart from "./screens/Cart";
 import Detail from "./screens/Detail";
 import Manage from "./screens/Manage";
 function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/manage" element={<Manage />} />
-      <Route path="/home/:id" element={<Detail />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/*" element={<NotFound />} />
-    </Routes>
-  );
+    return (
+        <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/manage" element={<Manage />} />
+            <Route path="/home/:id" element={<Detail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/*" element={<NotFound />} />
+        </Routes>
+    );
 }
 
 export default App;
